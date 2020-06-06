@@ -22,10 +22,10 @@ export default class extends Document<DocumentInitialProps> {
             name="viewport"
             content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
           />
-          <link rel="icon" href="/static/favicon.ico" />
+          <link rel="icon" href="/public/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
-          <link rel="apple-touch-icon" href="/static/favicon.ico" />
+          <link rel="apple-touch-icon" href="/public/favicon.ico" />
           <link
             rel="preload"
             as="font"
