@@ -18,7 +18,6 @@ export default function ({ Component, pageProps }: AppProps) {
   useEffect(() => {
     document.body.classList.remove('preload');
   }, []);
-  console.log('pageProps', pageProps);
   return (
     <Provider value={rootStore}>
       <Component {...pageProps} />

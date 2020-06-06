@@ -1,12 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  applySnapshot,
-  Instance,
-  SnapshotIn,
-  SnapshotOut,
-  types,
-  onSnapshot
-} from 'mobx-state-tree';
+import { applySnapshot, Instance, types, onSnapshot } from 'mobx-state-tree';
 import { FETCH_STATUS } from 'utils/constants';
 import { autoSearchStore } from './autoSearch';
 

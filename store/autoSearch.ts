@@ -1,12 +1,4 @@
-import React, { useContext } from 'react';
-import {
-  applySnapshot,
-  Instance,
-  SnapshotIn,
-  SnapshotOut,
-  types,
-  flow
-} from 'mobx-state-tree';
+import { Instance, types, flow } from 'mobx-state-tree';
 import fetchAutocomplete from 'services/fetchAutocomplete';
 import { FETCH_STATUS } from 'utils/constants';
 
@@ -42,4 +34,4 @@ export const autoSearchStore = types
     return { fetch };
   });
 
-type AutosearchStore = Instance<typeof autoSearchStore>;
+export type AutosearchStore = Instance<typeof autoSearchStore>;
