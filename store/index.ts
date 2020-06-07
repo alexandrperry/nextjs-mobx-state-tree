@@ -28,7 +28,7 @@ export function useMst() {
 }
 
 export function initializeStore(snapshot = null) {
-  const _store = store ?? rootStore;
+  const _store = rootStore;
 
   // If your page has Next.js data fetching methods that use a Mobx store, it will
   // get hydrated here, check `pages/ssg.tsx` and `pages/ssr.tsx` for more details

@@ -1,5 +1,5 @@
 import { getSnapshot } from 'mobx-state-tree';
-import { initializeStore, RootInstance } from 'store';
+import { RootInstance, rootStore } from 'store';
 
 const Ssg: React.FC<RootInstance> = (props) => <p>{JSON.stringify(props)}</p>;
 
@@ -7,9 +7,7 @@ const Ssg: React.FC<RootInstance> = (props) => <p>{JSON.stringify(props)}</p>;
 // value for all requests, as this method gets executed at build time.
 export default Ssg;
 export async function getStaticProps() {
-  const store = initializeStore();
+  await rootStore.autoSearch.fetch('barc');
 
-  await store.autoSearch.fetch('barc');
-
-  return { props: getSnapshot(store) };
+  return { props: getSnapshot(rootStore) };
 }
