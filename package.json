@@ -7,6 +7,7 @@
     "start": "next start",
     "export": "next export",
     "test": "yarn --passWithNoTests",
+    "postbuild": "next-on-netlify",
     "type-check": "tsc"
   },
   "dependencies": {
