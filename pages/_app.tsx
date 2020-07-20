@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'styles/index.scss';
-//import 'antd/dist/antd.css';
+import 'antd/dist/antd.css';
 import 'styles/nprogress.css';
 import { rootStore, Provider } from 'store';
 import 'mobx-react/batchingForReactDom';
