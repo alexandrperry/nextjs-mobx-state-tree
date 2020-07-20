@@ -5,6 +5,6 @@
 ## Description
 
 App includes three rendering techiques:
-⋅⋅* Client-side
-⋅⋅* Server-side
-⋅⋅\* Static generation
+* Client-side
+* Server-side
+* Static generation
