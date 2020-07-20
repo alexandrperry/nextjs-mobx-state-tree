@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from 'components/Header';
-import { useMst } from 'store';
 
 type Props = {
   title?: string;

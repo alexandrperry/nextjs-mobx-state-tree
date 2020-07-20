@@ -1,4 +1,4 @@
-import { Instance, types, flow, getEnv } from 'mobx-state-tree';
+import { Instance, types, flow } from 'mobx-state-tree';
 import fetchAutocomplete from 'services/fetchAutocomplete';
 import { FETCH_STATUS } from 'utils/constants';
 
@@ -48,7 +48,7 @@ export const autoSearchStore = types
         self.state = FETCH_STATUS.ERROR;
       }
     });
-    const chooseCity = function (data) {
+    const chooseCity = function (data: autoSearchItem) {
       self.selectedCity = data.defaultName;
     };
     return { fetch, chooseCity };
