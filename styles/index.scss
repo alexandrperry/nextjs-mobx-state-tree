@@ -1,6 +1,3 @@
-@use './colors' as colors;
-@use './constants' as constants;
-
 * {
   box-sizing: border-box;
   touch-action: manipulation;
@@ -16,16 +13,12 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
 
-  background-color: colors.$theme;
+  background-color: white;
 }
 
 .preload * {
   // make Transitions Only After Page Load
   transition: none !important;
-}
-
-main {
-  padding-top: constants.$headerHeight;
 }
 
 ul {

@@ -7,13 +7,9 @@ type Props = {
 };
 
 const Layout: React.FunctionComponent<Props> = ({ children }) => {
-  const {
-    autoSearch: { data }
-  } = useMst();
-  console.log('data', data);
   return (
     <>
-      <Header data={data} />
+      <Header />
       <main>{children}</main>
     </>
   );

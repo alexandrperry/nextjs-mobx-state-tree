@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { applySnapshot, Instance, types, onSnapshot } from 'mobx-state-tree';
+
 import { FETCH_STATUS } from 'utils/constants';
+import makeInspectable from 'mobx-devtools-mst';
 import { autoSearchStore } from './autoSearch';
 
 let store: RootInstance | undefined;
@@ -13,7 +15,9 @@ export const rootStore = RootModel.create({
   autoSearch: { state: FETCH_STATUS.INIT }
 });
 
-onSnapshot(rootStore, (snapshot) => console.log('Snapshot: ', snapshot));
+makeInspectable(rootStore);
+
+onSnapshot(rootStore, (snapshot) => console.log(snapshot));
 
 export type RootInstance = Instance<typeof RootModel>;
 const RootStoreContext = React.createContext<null | RootInstance>(null);

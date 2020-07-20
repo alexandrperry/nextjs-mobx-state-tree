@@ -1,11 +1,28 @@
-import { Instance, types, flow } from 'mobx-state-tree';
+import { Instance, types, flow, getEnv } from 'mobx-state-tree';
 import fetchAutocomplete from 'services/fetchAutocomplete';
 import { FETCH_STATUS } from 'utils/constants';
 
 const autoSearchItem = types.model({
   defaultName: types.string,
-  countryCode: types.string
+  countryCode: types.string,
+  positionId: types.identifierNumber,
+  population: types.number
 });
+
+// const selectedCity = types.maybeNull(
+//   types.reference(autoSearchItem, {
+//     // given an identifier, find the user
+//     get(identifier /* string */, parent: any /*Store*/) {
+//       return parent.data.find((u) => u.positionId === identifier) || null;
+//     },
+//     // given a user, produce the identifier that should be stored
+//     set(value /* User */) {
+//       return value.positionId;
+//     }
+//   })
+// );
+
+const selectedCity = types.maybeNull(types.string);
 
 export const autoSearchStore = types
   .model({
@@ -13,7 +30,8 @@ export const autoSearchStore = types
       'status',
       Object.values(FETCH_STATUS)
     ),
-    data: types.array(autoSearchItem)
+    data: types.array(autoSearchItem),
+    selectedCity
   })
   .actions((self) => {
     const fetch = flow(function* (query: string) {
@@ -22,7 +40,6 @@ export const autoSearchStore = types
       try {
         // ... yield can be used in async/await style
         const { data } = yield fetchAutocomplete(query);
-        console.log(data);
         self.data = data;
         self.state = FETCH_STATUS.SUCCESS;
       } catch (error) {
@@ -31,7 +48,12 @@ export const autoSearchStore = types
         self.state = FETCH_STATUS.ERROR;
       }
     });
-    return { fetch };
+    const chooseCity = function (data) {
+      self.selectedCity = data.defaultName;
+    };
+    return { fetch, chooseCity };
   });
 
 export type AutosearchStore = Instance<typeof autoSearchStore>;
+
+export type autoSearchItem = Instance<typeof autoSearchItem>;

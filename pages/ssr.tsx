@@ -1,11 +1,37 @@
 import { getSnapshot } from 'mobx-state-tree';
 import { rootStore, RootInstance } from 'store';
+import Layout from 'components/Layout';
+import { Table, Typography, Divider } from 'antd';
 
-const Ssg: React.FC<RootInstance> = (props) => <p>{JSON.stringify(props)}</p>;
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'defaultName',
+    key: 'defaultName'
+  },
+  {
+    title: 'Country code',
+    dataIndex: 'countryCode',
+    key: 'countryCode'
+  },
+  {
+    title: 'Population',
+    dataIndex: 'population',
+    key: 'population'
+  }
+];
 
-export default Ssg;
+const Ssr: React.FC<RootInstance['autoSearch']> = ({ data }) => (
+  <Layout>
+    <Typography.Title>Server-side rendering</Typography.Title>
+    <Divider />
+    <Table dataSource={data} columns={columns} />
+  </Layout>
+);
+
+export default Ssr;
 
 export async function getServerSideProps() {
-  await rootStore.autoSearch.fetch('par');
-  return { props: getSnapshot(rootStore) };
+  await rootStore.autoSearch.fetch('pa');
+  return { props: getSnapshot(rootStore.autoSearch) };
 }

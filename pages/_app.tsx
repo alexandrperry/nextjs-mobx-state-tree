@@ -1,10 +1,9 @@
 import { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import 'styles/normalize.css';
 import 'styles/index.scss';
+//import 'antd/dist/antd.css';
 import 'styles/nprogress.css';
-import { useEffect } from 'react';
 import { rootStore, Provider } from 'store';
 import 'mobx-react/batchingForReactDom';
 
@@ -15,9 +14,6 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 export default function ({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    document.body.classList.remove('preload');
-  }, []);
   return (
     <Provider value={rootStore}>
       <Component {...pageProps} />
