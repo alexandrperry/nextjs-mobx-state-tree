@@ -2,13 +2,6 @@ import { Instance, types, flow } from 'mobx-state-tree';
 import fetchAutocomplete from 'services/fetchAutocomplete';
 import { FETCH_STATUS } from 'utils/constants';
 
-const autoSearchItem = types.model({
-  defaultName: types.string,
-  countryCode: types.string,
-  positionId: types.identifierNumber,
-  population: types.number
-});
-
 // const selectedCity = types.maybeNull(
 //   types.reference(autoSearchItem, {
 //     // given an identifier, find the user
@@ -21,6 +14,18 @@ const autoSearchItem = types.model({
 //     }
 //   })
 // );
+
+import { fetchInstance } from 'utils/fetch';
+import { CancelTokenSource } from 'axios';
+
+const autoSearchItem = types.model({
+  defaultName: types.string,
+  countryCode: types.string,
+  positionId: types.identifierNumber,
+  population: types.number
+});
+
+let source: CancelTokenSource;
 
 const selectedCity = types.maybeNull(types.string);
 
@@ -39,7 +44,11 @@ export const autoSearchStore = types
       self.state = FETCH_STATUS.LOADING;
       try {
         // ... yield can be used in async/await style
-        const { data } = yield fetchAutocomplete(query);
+        if (source) {
+          source.cancel('Operation canceled by the user.');
+        }
+        source = fetchInstance.CancelToken.source();
+        const { data } = yield fetchAutocomplete(query, source);
         self.data = data;
         self.state = FETCH_STATUS.SUCCESS;
       } catch (error) {

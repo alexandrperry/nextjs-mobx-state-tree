@@ -1,10 +1,14 @@
 import { fetchInstance } from 'utils/fetch';
-import { AxiosResponse } from 'axios';
+import { AxiosResponse, CancelTokenSource } from 'axios';
 
 export default async function fetchAutocomplete(
-  query: string
+  query: string,
+  source: CancelTokenSource
 ): Promise<AxiosResponse<any>> {
   return fetchInstance.get(
-    `https://www.omio.com.ua/suggester-api/v5/position?term=${query}&locale=uk&hierarchical=true`
+    `https://www.omio.com.ua/suggester-api/v5/position?term=${query}&locale=uk&hierarchical=true`,
+    {
+      cancelToken: source.token
+    }
   );
 }

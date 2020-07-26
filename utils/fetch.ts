@@ -2,12 +2,18 @@ import axios, {
   AxiosInstance,
   AxiosResponse,
   AxiosError,
-  AxiosRequestConfig
+  AxiosRequestConfig,
+  CancelTokenStatic
 } from 'axios';
 
-const instance: AxiosInstance = axios.create({
+interface FetchInstance extends AxiosInstance {
+  CancelToken: CancelTokenStatic;
+  isCancel: (value: any) => boolean;
+}
+
+const instance = axios.create({
   baseURL: process.env.API_URL
-});
+}) as FetchInstance;
 
 const onRequestSuccess = async (config: AxiosRequestConfig) => {
   // TODO: check user token
@@ -24,5 +30,8 @@ const onError = async (error: AxiosError): Promise<any> => {
 instance.interceptors.request.use(onRequestSuccess, onRequestError);
 instance.interceptors.response.use(onSuccess, onError);
 // instance.defaults.headers['Cache-Control'] = 'no-cache';
+
+instance.CancelToken = axios.CancelToken;
+instance.isCancel = axios.isCancel;
 
 export { instance as fetchInstance };
