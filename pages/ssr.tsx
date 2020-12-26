@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import { getSnapshot } from 'mobx-state-tree';
 import { rootStore, RootInstance } from 'store';
 import Layout from 'components/Layout';
