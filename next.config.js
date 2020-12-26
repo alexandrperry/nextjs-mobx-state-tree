@@ -20,6 +20,6 @@ module.exports = withFonts({
     ];
     return config;
   },
-  exportTrailingSlash: process.env.NODE_ENV === 'development' ? false : true,
+  trailingSlash: process.env.NODE_ENV === 'development' ? false : true,
   target: 'serverless'
 });
