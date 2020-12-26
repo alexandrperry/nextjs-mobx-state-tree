@@ -33,7 +33,7 @@ const Ssr: React.FC<RootInstance['autoSearch']> = ({ data }) => (
 export default Ssr;
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  await rootStore.autoSearch.fetch('pa');
   ctx.res.setHeader('Cache-Control', `s-maxage=1, stale-while-revalidate`);
+  await rootStore.autoSearch.fetch('pa');
   return { props: getSnapshot(rootStore.autoSearch) };
 }
