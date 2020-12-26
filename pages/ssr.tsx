@@ -22,9 +22,15 @@ const columns = [
   }
 ];
 
-const Ssr: React.FC<RootInstance['autoSearch']> = ({ data }) => (
+const Ssr: React.FC<RootInstance['autoSearch'] & { time: string }> = ({
+  data,
+  time
+}) => (
   <Layout>
-    <Typography.Title>Server-side rendering</Typography.Title>
+    <Typography.Title>
+      Server-side rendering at
+      {time}
+    </Typography.Title>
     <Divider />
     <Table dataSource={data} columns={columns} />
   </Layout>
@@ -35,5 +41,10 @@ export default Ssr;
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   ctx.res.setHeader('Cache-Control', `s-maxage=1, stale-while-revalidate`);
   await rootStore.autoSearch.fetch('pa');
-  return { props: getSnapshot(rootStore.autoSearch) };
+  return {
+    props: {
+      ...getSnapshot(rootStore.autoSearch),
+      time: new Date().toLocaleString()
+    }
+  };
 }
