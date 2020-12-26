@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import 'styles/index.scss';
+import 'styles/index.css';
 import 'antd/dist/antd.css';
 import 'styles/nprogress.css';
 import { rootStore, Provider } from 'store';
