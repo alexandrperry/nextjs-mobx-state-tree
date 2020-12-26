@@ -1,3 +1,4 @@
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { getSnapshot } from 'mobx-state-tree';
 import { rootStore, RootInstance } from 'store';
 import Layout from 'components/Layout';
@@ -31,7 +32,8 @@ const Ssr: React.FC<RootInstance['autoSearch']> = ({ data }) => (
 
 export default Ssr;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   await rootStore.autoSearch.fetch('pa');
+  ctx.res.setHeader('Cache-Control', `s-maxage=1, stale-while-revalidate`);
   return { props: getSnapshot(rootStore.autoSearch) };
 }
