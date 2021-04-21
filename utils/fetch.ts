@@ -28,7 +28,7 @@ const onError = async (error: AxiosError): Promise<any> => {
 
 instance.interceptors.request.use(onRequestSuccess, onRequestError);
 instance.interceptors.response.use(onSuccess, onError);
-// instance.defaults.headers['Cache-Control'] = 'no-cache';
+instance.defaults.headers['Cache-Control'] = 'no-cache';
 
 instance.CancelToken = axios.CancelToken;
 instance.isCancel = axios.isCancel;
