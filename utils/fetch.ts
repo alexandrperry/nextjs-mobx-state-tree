@@ -8,7 +8,7 @@ import axios, {
 
 interface FetchInstance extends AxiosInstance {
   CancelToken: CancelTokenStatic;
-  isCancel: (value: any) => boolean;
+  isCancel: (value: unknown) => boolean;
 }
 
 const instance = axios.create({
@@ -16,7 +16,6 @@ const instance = axios.create({
 }) as FetchInstance;
 
 const onRequestSuccess = async (config: AxiosRequestConfig) => {
-  // TODO: check user token
   return config;
 };
 

@@ -9,6 +9,7 @@ const Layout: React.FunctionComponent<Props> = ({ children }) => {
   return (
     <>
       <Header />
+      <p>Helo</p>
       <main>{children}</main>
     </>
   );
