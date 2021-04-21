@@ -8,7 +8,7 @@ import axios, {
 
 interface FetchInstance extends AxiosInstance {
   CancelToken: CancelTokenStatic;
-  isCancel: (value: any) => boolean;
+  isCancel: (value: unknown) => boolean;
 }
 
 const instance = axios.create({
