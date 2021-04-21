@@ -16,7 +16,6 @@ const instance = axios.create({
 }) as FetchInstance;
 
 const onRequestSuccess = async (config: AxiosRequestConfig) => {
-  // TODO: check user token
   return config;
 };
 
